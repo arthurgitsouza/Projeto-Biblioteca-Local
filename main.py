@@ -1,9 +1,5 @@
 import pandas as pd
 import os
-<<<<<<< HEAD
-from tabulate import tabulate
-=======
->>>>>>> f3cb944f728ad0ef9154723a75cabfaba7552e2b
 from time import sleep
 import csv
 
@@ -19,97 +15,28 @@ class livro:
             print('\nLivro adicionado com Sucesso!!')
             sleep(2)
         else:
-<<<<<<< HEAD
-            print(f'\nNão foi possível adicionar, pois o livro "{nome}" já está adicionado à lista de livros da biblioteca!')
-=======
             print(f'\nO livro "{nome}" já está na lista de livros!')
->>>>>>> f3cb944f728ad0ef9154723a75cabfaba7552e2b
             sleep(2)
 
     def listar_disponiveis():
         livros_disponiveis = pd.DataFrame(livros).T
-<<<<<<< HEAD
-        if livros_disponiveis.empty: # Empty é o erro que dá quando o DataFrame não contém nenhum dado.
-            print("\nNão há livros adicionados a biblioteca, ou não há mais livros disponíveis!")
-=======
         if livros_disponiveis.empty:
             print("\nNão há livros disponíveis!")
->>>>>>> f3cb944f728ad0ef9154723a75cabfaba7552e2b
         else:
             print(livros_disponiveis)
         sleep(7)
 
 class usuario:
     def adicionar_usuario(id, nome, end):
-<<<<<<< HEAD
-        usuario = {'Id do Usuário:': id, 'Nome do Usuário:': nome, 'Endereço:': end, 'Livros Emprestados:': 0, 'Histórico de Leitura:' : []} 
-        for dado in usuarios.values():
-            if id == dado['Id do Usuário:']:
-                print(f"\nNão foi possível adicionar, pois já existe um usuário com o ID {id}, cujo nome é {dado['Nome do Usuário:']}!")
-=======
         usuario = {'Id do Usuário:': id, 'Nome do Usuário:': nome, 'Endereço:': end, 'Livros Emprestados:': 0, 'Histórico de Leitura:': []} 
         for dado in usuarios.values():
             if id == dado['Id do Usuário:']:
                 print(f"\nJá existe um usuário com o ID {id}, nome: {dado['Nome do Usuário:']}!")
->>>>>>> f3cb944f728ad0ef9154723a75cabfaba7552e2b
                 sleep(2)
                 return
         usuarios[nome] = usuario
         print("\nUsuário adicionado com sucesso!")
         sleep(2)
-<<<<<<< HEAD
-
-    def listar_usuarios():
-        if usuarios:
-            lista_usuarios = pd.DataFrame(usuarios).T
-            print(lista_usuarios)
-        else:
-            print('\nAinda não há usuários adicionados até o momento!')
-        sleep(4)
-
-class emprestimo: # 3h só para fazer a lógica dessa classe
-    def emprestar_livro(nomelivro, nomeusuario, dataemprestimo):
-        if nomelivro in livros:
-            if livros[nomelivro]['Quantidade de Exemplares:'] >= 1:
-                usuarios[nomeusuario]['Livros Emprestados'] = int(usuarios[nomeusuario]['Livros Emprestados:'])
-                if nomeusuario in usuarios and usuarios[nomeusuario]['Livros Emprestados:'] < 3:
-                    livros_emprestados[nomelivro] = {'Nome do Livro:': nomelivro,'Nome do usuário responsável:': nomeusuario, 'Data de empréstimo:': dataemprestimo}
-                    livros[nomelivro]['Quantidade de Exemplares:'] -= 1
-                    usuarios[nomeusuario]['Livros Emprestados:'] += 1
-                    print("\nLivro emprestado com sucesso!")
-                else:
-                    print(f"\nUsuário '{nomeusuario}' já atingiu o limite de 3 livros emprestados!")
-            else:
-                print(f"\nO livro '{nomelivro}' não tem exemplares disponíveis!")
-        else:
-            print("\nO livro não consta dentre os disponíveis para o empréstimo!")
-        sleep(2)
-    def listar_emprestados():
-        if livros_emprestados:
-            lista_emprestados = pd.DataFrame(livros_emprestados).T
-            print(lista_emprestados)
-        else:
-            print("\nNão há livros emprestados pela biblioteca!")
-        sleep(4)
-
-
-
-class devolucao:
-    def devolver_livro(nomelivro, nomeusuario, idlivro, nomeautor, datadevolucao):
-        if nomelivro in livros_emprestados and nomeusuario in usuarios:
-            del(livros_emprestados[nomelivro])
-            livros[nomelivro]['Quantidade de Exemplares:'] += 1
-            usuarios[nomeusuario]['Livros Emprestados:'] -= 1
-            print("Livro devolvido com sucesso!")
-            usuarios[nomeusuario]['Histórico de Leitura:'].append(nomelivro)
-        else:
-            print(f"\nO livro '{nomelivro}' não consta na lista de livros emprestados.")
-        sleep(2)
-
-# FUNÇÕES DE ARQUIVO:
-
-#Funções Livros:    
-=======
 
     def listar_usuarios():
         if usuarios:
@@ -159,25 +86,14 @@ class devolucao:
 
 # Funções de Livros
 
->>>>>>> f3cb944f728ad0ef9154723a75cabfaba7552e2b
 def salvar_livros():
     with open('livros.csv', 'w', newline="") as csvfile: 
         cabecalio = ['Id do Livro:', 'Nome do Livro:', 'Autor do Livro:', 'Quantidade de Exemplares:']
         writer = csv.DictWriter(csvfile, fieldnames=cabecalio)
         writer.writeheader()
         for livro, dados_livros in livros.items():
-<<<<<<< HEAD
-            writer.writerow({
-                'Id do Livro:': dados_livros['Id do Livro:'],
-                'Nome do Livro:': dados_livros['Nome do Livro:'],
-                'Autor do Livro:': dados_livros['Autor do Livro:'],
-                'Quantidade de Exemplares:': dados_livros['Quantidade de Exemplares:']
-            })
-            
-=======
             writer.writerow(dados_livros)
 
->>>>>>> f3cb944f728ad0ef9154723a75cabfaba7552e2b
 def ler_livros():
     if os.path.exists('livros.csv'):
         with open('livros.csv', 'r', newline='') as csvfile:
@@ -186,26 +102,6 @@ def ler_livros():
                 idlivro = row['Id do Livro:']  
                 nomelivro = row['Nome do Livro:']
                 autorlivro = row['Autor do Livro:'] 
-<<<<<<< HEAD
-                quantidade = int(row['Quantidade de Exemplares:'])  # é um valor inteiro, se for como str apresenta erro
-                livros[nomelivro] = {'Id do Livro:': idlivro, 'Nome do Livro:': nomelivro, 'Autor do Livro:': autorlivro, 'Quantidade de Exemplares:': quantidade}
-
-#Funções Usuários:
-def salvar_usuarios():
-    with open('usuarios.csv', 'w', newline="") as csvfileusuarios:
-        cabecalio = ['Id do Usuário:', 'Nome do Usuário:', 'Endereço:', 'Livros Emprestados:', 'Histórico de Leitura:']
-        writer = csv.DictWriter(csvfileusuarios, fieldnames=cabecalio)
-        writer.writeheader()
-        for chaveusuario, dados_usuarios in usuarios.items():
-            writer.writerow({
-                'Id do Usuário:' : dados_usuarios['Id do Usuário:'],
-                'Nome do Usuário:' : dados_usuarios['Nome do Usuário:'],
-                'Endereço:' : dados_usuarios['Endereço:'],
-                'Livros Emprestados:' : dados_usuarios['Livros Emprestados:'],
-                'Histórico de Leitura:' : dados_usuarios['Histórico de Leitura:']
-            })
-
-=======
                 quantidade = int(row['Quantidade de Exemplares:'])
                 livros[nomelivro] = {'Id do Livro:': idlivro, 'Nome do Livro:': nomelivro, 'Autor do Livro:': autorlivro, 'Quantidade de Exemplares:': quantidade}
 
@@ -222,20 +118,11 @@ def salvar_usuarios():
             writer.writerow(dados_usuarios)
 
 
->>>>>>> f3cb944f728ad0ef9154723a75cabfaba7552e2b
 def ler_usuarios():
     if os.path.exists('usuarios.csv'):
         with open('usuarios.csv', 'r', newline='') as csvfileusuarios:
             reader = csv.DictReader(csvfileusuarios)
             for row in reader:
-<<<<<<< HEAD
-                idusuario = row['Id do Usuário:']
-                nomeusuario = row['Nome do Usuário:']
-                endereco = row['Endereço:']
-                livrosemp = int(row['Livros Emprestados:'])
-                histleitura = row['Histórico de Leitura:']
-                usuarios[nomeusuario] = {'Id do Usuário:' : idusuario, 'Nome do Usuário:' : nomeusuario, 'Endereço:' : endereco, 'Livros Emprestados:' : livrosemp, 'Histórico de Leitura:' : histleitura}
-=======
                 nomeusuario = row['Nome do Usuário:']
                 if row['Histórico de Leitura:']:
                     row['Histórico de Leitura:'] = row['Histórico de Leitura:'].split(',')
@@ -264,7 +151,6 @@ def ler_emprestimos():
                 livros_emprestados[nomelivro] = row
 
 # PROGRAMA PRINCIPAL:
->>>>>>> f3cb944f728ad0ef9154723a75cabfaba7552e2b
 
 #Funções Empréstimo:
 def salvar_emprestimos():
@@ -329,10 +215,7 @@ def principal():
             emprestimo.emprestar_livro(nome_livro, nome_usuario, data_emprestimo)
             salvar_livros()
             salvar_emprestimos()
-<<<<<<< HEAD
-=======
             salvar_usuarios()
->>>>>>> f3cb944f728ad0ef9154723a75cabfaba7552e2b
         
         elif op == 4:
             id_livro = int(input("Digite o ID do livro emprestado: "))
@@ -349,11 +232,7 @@ def principal():
         
         elif op == 6:
             salvar_emprestimos()
-<<<<<<< HEAD
-            ler_emprestimos()
-=======
             ler_usuarios()
->>>>>>> f3cb944f728ad0ef9154723a75cabfaba7552e2b
             emprestimo.listar_emprestados()
 
         elif op == 7:
@@ -374,8 +253,4 @@ def principal():
             print("\nOpção inválida, tente novamente!")
             sleep(2)
 
-<<<<<<< HEAD
 principal()
-=======
-principal()
->>>>>>> f3cb944f728ad0ef9154723a75cabfaba7552e2b
